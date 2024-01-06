@@ -2,7 +2,7 @@
 .STACK 100h
 .DATA  
 
-msg_start       DB 0Dh, 0Ah, '===SELAMAT DATANG DI KALKULATOR BANGUN DATAR===', 0Dh, 0Ah, '$'
+msg_start       DB 0Dh, 0Ah, '===SELAMAT DATANG DI KALKULATOR BANGUN RUANG===', 0Dh, 0Ah, '$'
 msg_pilih       DB 0Dh, 0Ah, 'Pilih bangun datar yang akan dihitung:', 0Dh, 0Ah, '1. Balok', 0Dh, 0Ah, '2. Kubus', 0Dh, 0Ah,'3. LIMAS', 0Dh, 0Ah,'4. Bola', 0Dh, 0Ah, '5. PRISMA', 0Dh, 0Ah,'6. Keluar', 0Dh, 0Ah, '$'
 msg_sisi        DB 0Dh, 0Ah, 'Masukkan panjang sisi (1-9): $'
 msg_panjang     DB 0Dh, 0Ah, 'Masukkan panjang (1-9): $'

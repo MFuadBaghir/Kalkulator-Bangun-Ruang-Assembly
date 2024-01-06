@@ -53,8 +53,8 @@ BALOK:
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0' ; Convert ASCII to numeric value
-    MOV BL, AL ; Store the first dimension (length) in BL
+    SUB AL, '0' 
+    MOV BL, AL 
     
     LEA DX, msg_lebar
     MOV AH, 09h
@@ -62,8 +62,8 @@ BALOK:
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0' ; Convert ASCII to numeric value
-    MOV BH, AL ; Store the second dimension (width) in BH
+    SUB AL, '0'
+    MOV BH, AL 
 
     LEA DX, msg_tinggi
     MOV AH, 09h
@@ -71,106 +71,101 @@ BALOK:
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0' ; Convert ASCII to numeric value
-    MOV CL, AL ; Store the third dimension (height) in CL
+    SUB AL, '0' 
+    MOV CL, AL 
 
-    MUL BL     ; Multiply the length by width
-    MUL CL     ; Multiply the result by height to get volume
-    MOV BX, AX ; Store the result in BX
+    MUL BL     
+    MUL CL     
+    MOV BX, AX 
     
     JMP TULIS_ANGKA
 
 
 KUBUS:
-    LEA DX, msg_sisi  ; Prompt for side length
+    LEA DX, msg_sisi  
     MOV AH, 09h
     INT 21h
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0'       ; Convert ASCII to numeric value
-    MOV BL, AL        ; Store the side length in BL
+    SUB AL, '0'       
+    MOV BL, AL      
 
-    MUL BL            ; Multiply the side length by itself twice to get the volume of a cube
+    MUL BL            
     MUL BL
-    MOV BX, AX        ; Store the result in BX
+    MOV BX, AX        
 
-    JMP TULIS_ANGKA   ; Display the result   
+    JMP TULIS_ANGKA     
     
 PIRAMIDA:
-    LEA DX, msg_alas   ; Prompt for base length
+    LEA DX, msg_alas   
     MOV AH, 09h
     INT 21h
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0'        ; Convert ASCII to numeric value
-    MOV BL, AL         ; Store the base length in BL
+    SUB AL, '0'        
+    MOV BL, AL         
     
-    MUL BL             ; Calculate base area (base length * base length)
-    MOV BX, AX         ; Store the base area in BX
+    MUL BL             
+    MOV BX, AX        
 
-    LEA DX, msg_tinggi ; Prompt for pyramid height
+    LEA DX, msg_tinggi 
     MOV AH, 09h
     INT 21h
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0'        ; Convert ASCII to numeric value
-    MOV CL, AL         ; Store the height in CL
+    SUB AL, '0'        
+    MOV CL, AL         
 
-    MOV AX, BX         ; Move base area back to AX
-    MUL CL             ; Multiply base area by height
-    MOV BX, AX         ; Store the result in BX (volume of pyramid)
+    MOV AX, BX       
+    MUL CL            
+    MOV BX, AX         
 
-    JMP TULIS_ANGKA    ; Display the result 
+    JMP TULIS_ANGKA    
 
 BOLA:
-    LEA DX, msg_jari  ; Prompt for sphere radius
+    LEA DX, msg_jari  
     MOV AH, 09h
     INT 21h
 
     MOV AH, 01h
     INT 21h
-    SUB AL, '0'     ; Convert ASCII to numeric value
-    MOV BL, AL     ; Store the radius in BL
-
-    ; Calculate the volume of a sphere using (4/3) * pi * radius^3
-    MOV AX, BL      ; Move radius to AX for multiplication
-    MUL BL       ; Multiply radius by itself
-    MUL BL       ; Multiply the result by radius again (radius^3)
-    MOV CX, 133     ; Set CX to 133 for the constant 4/3 * pi (approximately)
-    IMUL CX       ; Multiply by the constant to get the approximate volume
-
-    ; Store the result in BX for display
+    SUB AL, '0'     
+    MOV BL, AL     
+    MOV AX, BL     
+    MUL BL       
+    MUL BL       
+    MOV CX, 133 
+    IMUL CX 
     MOV BX, AX
-
-    JMP TULIS_ANGKA   ; Display the result
+    JMP TULIS_ANGKA 
 
 PRISMA:
-    LEA DX, msg_alas    ; Prompt for base area
+    LEA DX, msg_alas 
     MOV AH, 09h
     INT 21h
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0'         ; Convert ASCII to numeric value
-    MOV BL, AL          ; Store the base area in BL
+    SUB AL, '0'         
+    MOV BL, AL         
     
-    LEA DX, msg_tinggi  ; Prompt for height
+    LEA DX, msg_tinggi  
     MOV AH, 09h
     INT 21h
     
     MOV AH, 01h
     INT 21h
-    SUB AL, '0'         ; Convert ASCII to numeric value
-    MOV CL, AL          ; Store the height in CL
+    SUB AL, '0'       
+    MOV CL, AL          
 
-    MOV AX, BX          ; Move base area back to AX
-    MUL CL              ; Multiply base area by height
-    MOV BX, AX          ; Store the result in BX (volume of prism)
+    MOV AX, BX          
+    MUL CL              
+    MOV BX, AX          
 
-    JMP TULIS_ANGKA     ; Display the result
+    JMP TULIS_ANGKA    
 
 
 
@@ -228,10 +223,10 @@ CETAK_LOOP:
     DEC BX
     JNZ CETAK_LOOP
 
-    MOV [DI], ' '  ; Add a space after each character
+    MOV [DI], ' '  
     INC DI
 
-    MOV [DI], '$' ; Add the termination character
+    MOV [DI], '$' 
     POP DX
     POP CX
     POP BX

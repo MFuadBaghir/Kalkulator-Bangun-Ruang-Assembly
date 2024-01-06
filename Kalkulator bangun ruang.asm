@@ -3,7 +3,7 @@
 .DATA  
 
 msg_start       DB 0Dh, 0Ah, '===SELAMAT DATANG DI KALKULATOR BANGUN RUANG===', 0Dh, 0Ah, '$'
-msg_pilih       DB 0Dh, 0Ah, 'Pilih bangun datar yang akan dihitung:', 0Dh, 0Ah, '1. Balok', 0Dh, 0Ah, '2. Kubus', 0Dh, 0Ah,'3. LIMAS', 0Dh, 0Ah,'4. Bola', 0Dh, 0Ah, '5. PRISMA', 0Dh, 0Ah,'6. Keluar', 0Dh, 0Ah, '$'
+msg_pilih       DB 0Dh, 0Ah, 'Pilih bangun ruang yang akan dihitung:', 0Dh, 0Ah, '1. Balok', 0Dh, 0Ah, '2. Kubus', 0Dh, 0Ah,'3. LIMAS', 0Dh, 0Ah,'4. Bola', 0Dh, 0Ah, '5. PRISMA', 0Dh, 0Ah,'6. Keluar', 0Dh, 0Ah, '$'
 msg_sisi        DB 0Dh, 0Ah, 'Masukkan panjang sisi (1-9): $'
 msg_panjang     DB 0Dh, 0Ah, 'Masukkan panjang (1-9): $'
 msg_lebar       DB 0Dh, 0Ah, 'Masukkan lebar (1-9): $'
@@ -12,7 +12,7 @@ msg_tinggi      DB 0Dh, 0Ah, 'Masukkan tinggi (1-9): $'
 msg_jari        DB 0Dh, 0Ah, 'Masukkan jari-jari (1-9): $'
 msg_hasil       DB 0Dh, 0Ah, 'Hasil perhitungan volume: $', 0Dh, 0Ah, '$'
 msg_invalid     DB 0Dh, 0Ah, 'Masukan nomor yang valid!', 0Dh, 0Ah, '$'
-msg_keluar      DB 0Dh, 0Ah, 'TERIMA KASIH TELAH MENGGUNAKAN KALKULATOR INI :)', 0Dh, 0Ah, '$' 
+msg_keluar      DB 0Dh, 0Ah, 'TERIMA KASIH TELAH MENGGUNAKAN KALKULATOR BANGUN RUANG', 0Dh, 0Ah, '$' 
 hasil           DB 10 DUP('$')
 
 .CODE

@@ -3,7 +3,7 @@
 .DATA  
 
 msg_start       DB 0Dh, 0Ah, '===SELAMAT DATANG DI KALKULATOR BANGUN RUANG===', 0Dh, 0Ah, '$'
-msg_pilih       DB 0Dh, 0Ah, 'Pilih bangun ruang yang akan dihitung:', 0Dh, 0Ah, '1. Balok', 0Dh, 0Ah, '2. Kubus', 0Dh, 0Ah,'3. Limas', 0Dh, 0Ah,'4. Bola', 0Dh, 0Ah, '5. Prisma', 0Dh, 0Ah,'6. Keluar', 0Dh, 0Ah, '$'
+msg_pilih       DB 0Dh, 0Ah, 'Pilih bangun ruang yang akan dihitung:', 0Dh, 0Ah, '1. Balok', 0Dh, 0Ah, '2. Kubus', 0Dh, 0Ah,'3. Limas', 0Dh, 0Ah,'4. Bola', 0Dh, 0Ah,'6. Keluar', 0Dh, 0Ah, '$'
 msg_sisi        DB 0Dh, 0Ah, 'Masukkan panjang sisi (1-9): $'
 msg_panjang     DB 0Dh, 0Ah, 'Masukkan panjang (1-9): $'
 msg_lebar       DB 0Dh, 0Ah, 'Masukkan lebar (1-9): $'
@@ -41,8 +41,6 @@ MENU:
     CMP AL, '4'    
     JE BOLA
     CMP AL, '5'
-    JE PRISMA
-    CMP AL, '6'
     JE KELUAR
     JMP INVALID
 
@@ -74,11 +72,13 @@ BALOK:
     SUB AL, '0' 
     MOV CL, AL 
 
-    MUL BL     
-    MUL CL     
-    MOV BX, AX 
+    MOV AX, BX 
+    MUL BH 
+    MUL CL 
     
     JMP TULIS_ANGKA
+
+
 
 
 KUBUS:
@@ -89,13 +89,14 @@ KUBUS:
     MOV AH, 01h
     INT 21h
     SUB AL, '0'       
-    MOV BL, AL      
+    MOV BL, AL
 
-    MUL BL            
-    MUL BL
-    MOV BX, AX        
-
-    JMP TULIS_ANGKA     
+    MOV AX, BX
+    MUL BX
+    MUL BX
+    
+    JMP TULIS_ANGKA
+  
     
 PIRAMIDA:
     LEA DX, msg_alas   
@@ -107,8 +108,9 @@ PIRAMIDA:
     SUB AL, '0'        
     MOV BL, AL         
     
-    MUL BL             
-    MOV BX, AX        
+    MOV AX, BX
+    MUL BX 
+    MOV BX, AX
 
     LEA DX, msg_tinggi 
     MOV AH, 09h
@@ -119,11 +121,18 @@ PIRAMIDA:
     SUB AL, '0'        
     MOV CL, AL         
 
-    MOV AX, BX       
-    MUL CL            
-    MOV BX, AX         
+    MOV AX, BX
+    MUL CL
+    MOV BX, AX
+    MOV DX, 0
+    MOV CX, 3
+    MOV AX, BX
+    IDIV CX
 
-    JMP TULIS_ANGKA    
+    JMP TULIS_ANGKA
+
+
+    
 
 BOLA:
     LEA DX, msg_jari  
@@ -134,42 +143,18 @@ BOLA:
     INT 21h
     SUB AL, '0'     
     MOV BL, AL     
-    MOV AX, BL     
-    MUL BL       
-    MUL BL       
-    MOV CX, 133 
-    IMUL CX 
-    MOV BX, AX
+
+    MOV AX, 314      ; Mendekati nilai pi dikali 100
+    MUL BL
+    MUL BL
+    MUL BL
+
+    MOV CX, 300      ; Konstanta pembagi (3/4 * 100)
+    MOV DX, 0        ; Nolkan register DX
+    IDIV CX          ; AX sekarang berisi hasil perkalian \(\frac{4}{3}\pi r^3\)
+
     JMP TULIS_ANGKA 
-
-PRISMA:
-    LEA DX, msg_alas 
-    MOV AH, 09h
-    INT 21h
-    
-    MOV AH, 01h
-    INT 21h
-    SUB AL, '0'         
-    MOV BL, AL         
-    
-    LEA DX, msg_tinggi  
-    MOV AH, 09h
-    INT 21h
-    
-    MOV AH, 01h
-    INT 21h
-    SUB AL, '0'       
-    MOV CL, AL          
-
-    MOV AX, BX          
-    MUL CL              
-    MOV BX, AX          
-
-    JMP TULIS_ANGKA    
-
-
-
-
+  
 
 KELUAR:  
     LEA DX, msg_keluar
